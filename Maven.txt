@@ -1,0 +1,93 @@
+1) Create Maven Java Project (Eclipse GUI)
+
+Open Eclipse IDE for Enterprise Java and Web Developers.
+
+File → New → Maven Project.
+
+In the wizard: check Create a simple project (skip archetype selection) only if you know what you want — otherwise leave unchecked and Next.
+
+In Filter type quickstart and wait.
+
+Select org.apache.maven.archetype:maven-archetype-quickstart:1.4 → Next.
+
+Fill the coordinates:
+
+Group Id (TeamID): SE (or com.yourname)
+
+Artifact Id: MavenJava
+
+Version: leave default (1.0-SNAPSHOT)
+→ Finish.
+
+Eclipse creates the project with this structure:
+
+MavenJava
+ ├─ src
+ │   ├─ main
+ │   │   └─ java
+ │   └─ test
+ └─ pom.xml
+
+
+Open src/main/java/SE/MavenJava/App.java — you’ll see the sample HelloWorld.
+
+To run Maven goals in Eclipse: Right click MavenJava → Run As → Maven clean, then Maven install, then Maven test (or run a build with goals).
+
+To run many goals at once: Right click → Run As → Maven Build… → in Goals type: clean install test → Run.
+
+
+
+2) Create Maven Web Project (Eclipse GUI)
+
+File → New → Maven Project.
+
+In Filter type webapp.
+
+Select org.apache.maven.archetypes:maven-archetype-webapp:1.4 → Next.
+
+Group Id: SE (or com.yourname)
+Artifact Id: MavenWeb → Finish.
+
+Project structure:
+
+MavenWeb
+ ├─ src
+ │  └─ main
+ │     └─ webapp
+ │         └─ index.jsp
+ └─ pom.xml
+
+
+Edit src/main/webapp/index.jsp — add your Hello World markup.
+
+If you need servlet APIs, you must add the dependency in pom.xml as provided scope:
+
+<dependency>
+  <groupId>jakarta.servlet</groupId>
+  <artifactId>jakarta.servlet-api</artifactId>
+  <version>6.0.0</version> <!-- pick a version compatible with your Tomcat -->
+  <scope>provided</scope>
+</dependency>
+
+
+provided means the servlet container (Tomcat) supplies it at runtime.
+
+2a) Configure Tomcat in Eclipse (so you can Run on Server)
+
+Window → Show View → Servers.
+
+In the Servers view → No servers are available. Click this link to create a new server…
+
+Choose Apache → Tomcat v9.0 (or v11 if supported) → Next.
+
+For Tomcat installation directory, point to your Tomcat installation (download Apache Tomcat and extract).
+
+If asked, choose Use Tomcat installation (takes control of Tomcat installation) if you want to edit server.xml, users etc.
+
+In server configuration, you can change ports (for labs choose non-default if needed).
+
+Add your MavenWeb project to the server (drag & drop or via the wizard).
+
+Start the server from the Servers view → Start.
+
+Right click index.jsp → Run As → Run on Server → choose the Tomcat server → Finish. Open http://localhost:8080/MavenWeb/ (or port you set).
